@@ -23,4 +23,14 @@ set +x
 echo 'The following command runs and outputs the execution of your Java'
 echo 'application (which Jenkins built using Maven) to the Jenkins UI.'
 set -x
-java -jar target/${NAME}-${VERSION}.jar
+# java -jar target/${NAME}-${VERSION}.jar
+
+# Проверка существования JAR файла
+JAR_FILE="target/${NAME}-${VERSION}.jar"
+if [[ -f "$JAR_FILE" ]]; then
+    java -jar "$JAR_FILE"
+else
+    echo "Error: JAR file $JAR_FILE not found."
+    exit 1
+fi
+set +x
