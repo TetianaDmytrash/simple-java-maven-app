@@ -19,8 +19,20 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
+                script {
+                    // Проверка существования и прав на выполнение
+                    sh 'ls -l ./jenkins/scripts/deliver.sh'
+                    sh 'chmod +x ./jenkins/scripts/deliver.sh'
+                    sh 'echo "Starting delivery script"'
+                    // Выполнение скрипта
+                    sh './jenkins/scripts/deliver.sh'
+                }
             }
+        }
+    }
+    post {
+        always {
+            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
         }
     }
 }
