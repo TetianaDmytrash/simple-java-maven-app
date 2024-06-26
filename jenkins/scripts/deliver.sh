@@ -26,7 +26,7 @@ set -x
 # java -jar target/${NAME}-${VERSION}.jar
 
 # Проверка существования JAR файла
-JAR_FILE="target/${NAME}-${VERSION}.jar"
+JAR_FILE="my-app/1.0-SNAPSHOT/${NAME}-${VERSION}.jar"
 if [[ -f "$JAR_FILE" ]]; then
     java -jar "$JAR_FILE"
 else
