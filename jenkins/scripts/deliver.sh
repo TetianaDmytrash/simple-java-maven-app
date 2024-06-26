@@ -29,7 +29,7 @@ set -x
 
 echo 'pwd'
 # Проверка существования JAR файла
-JAR_FILE="/target/${NAME}-${VERSION}.jar"
+JAR_FILE="/var/jenkins_home/workspace/github_pipeline_2024_06/target/${NAME}-${VERSION}.jar"
 if [[ -f "$JAR_FILE" ]]; then
     java -jar "$JAR_FILE"
 else
