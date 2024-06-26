@@ -36,7 +36,7 @@ echo 'application (which Jenkins built using Maven) to the Jenkins UI.'
 set -x
 
 # Проверка существования JAR файла
-JAR_FILE="target/my-app-1.0-SNAPSHOT.jar"
+JAR_FILE="target/$NAME-$VERSION.jar"
 chmod u+x "$JAR_FILE"
 ls -l "$JAR_FILE"
 pwd
