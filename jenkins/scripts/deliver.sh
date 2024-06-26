@@ -36,7 +36,11 @@ echo 'application (which Jenkins built using Maven) to the Jenkins UI.'
 set -x
 
 # Проверка существования JAR файла
-JAR_FILE="../target/${NAME}-${VERSION}.jar"
+JAR_FILE="target/${NAME}-${VERSION}.jar"
+chmod u+x "$JAR_FILE"
+ls -l "$JAR_FILE"
+pwd
+ls -l target
 if [[ -f "$JAR_FILE" ]]; then
     echo "JAR file $JAR_FILE found. Checking permissions:"
     ls -l "$JAR_FILE"
