@@ -27,6 +27,7 @@ echo 'The following command runs and outputs the execution of your Java'
 echo 'application (which Jenkins built using Maven) to the Jenkins UI.'
 set -x
 
+echo pwd
 # Проверка существования JAR файла
 JAR_FILE="target/${NAME}-${VERSION}.jar"
 if [[ -f "$JAR_FILE" ]]; then
