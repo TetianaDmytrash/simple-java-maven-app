@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh "sed -i 's/3.9.2/3.8.7/g' pom.xml"
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage('Deliver') {
+            steps {
+                script {
+                    // Проверка существования и прав на выполнение
+                    sh 'ls -l ./jenkins/scripts/deliver.sh'
+                    sh 'chmod +x ./jenkins/scripts/deliver.sh'
+                    sh 'echo "Starting delivery script"'
+                    // Выполнение скрипта
+                    sh './jenkins/scripts/deliver.sh'
+                }
+            }
+        }
+        stage('Complete') {
+            steps {
+                echo 'Job complete!'
+            }
+        }
+    }
+    post {
+        always {
+            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+        }
+    }
+}
